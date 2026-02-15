@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>祝・誕生 翠斗 (Akito)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700;900&family=Cormorant+Garamond:wght@600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at 30% 20%, #0a2e1a 0%, #061a0f 40%, #030d08 100%);
+      overflow: hidden;
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    /* ===== 星が降るエフェクト ===== */
+    .stars-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      top: -10px;
+      width: 4px;
+      height: 4px;
+      background: #ffd700;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 215, 0, 0.6);
+      animation: fall linear infinite;
+      opacity: 0;
+    }
+
+    .star::after {
+      content: '✦';
+      position: absolute;
+      top: -8px;
+      left: -6px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
+    }
+
+    @keyframes fall {
+      0%   { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    .star:nth-child(1)  { left: 5%;  animation-duration: 6s;  animation-delay: 0s; }
+    .star:nth-child(2)  { left: 12%; animation-duration: 8s;  animation-delay: 1s; }
+    .star:nth-child(3)  { left: 20%; animation-duration: 5s;  animation-delay: 3s; }
+    .star:nth-child(4)  { left: 28%; animation-duration: 7s;  animation-delay: 0.5s; }
+    .star:nth-child(5)  { left: 35%; animation-duration: 9s;  animation-delay: 2s; }
+    .star:nth-child(6)  { left: 42%; animation-duration: 6s;  animation-delay: 4s; }
+    .star:nth-child(7)  { left: 50%; animation-duration: 7s;  animation-delay: 1.5s; }
+    .star:nth-child(8)  { left: 58%; animation-duration: 5s;  animation-delay: 3.5s; }
+    .star:nth-child(9)  { left: 65%; animation-duration: 8s;  animation-delay: 0.8s; }
+    .star:nth-child(10) { left: 72%; animation-duration: 6s;  animation-delay: 2.5s; }
+    .star:nth-child(11) { left: 78%; animation-duration: 9s;  animation-delay: 1.2s; }
+    .star:nth-child(12) { left: 85%; animation-duration: 5s;  animation-delay: 4.5s; }
+    .star:nth-child(13) { left: 92%; animation-duration: 7s;  animation-delay: 0.3s; }
+    .star:nth-child(14) { left: 8%;  animation-duration: 10s; animation-delay: 2.8s; }
+    .star:nth-child(15) { left: 16%; animation-duration: 6s;  animation-delay: 5s; }
+    .star:nth-child(16) { left: 25%; animation-duration: 8s;  animation-delay: 1.8s; }
+    .star:nth-child(17) { left: 38%; animation-duration: 5s;  animation-delay: 3.2s; }
+    .star:nth-child(18) { left: 55%; animation-duration: 7s;  animation-delay: 0.7s; }
+    .star:nth-child(19) { left: 68%; animation-duration: 9s;  animation-delay: 4.2s; }
+    .star:nth-child(20) { left: 82%; animation-duration: 6s;  animation-delay: 2.2s; }
+    .star:nth-child(21) { left: 95%; animation-duration: 8s;  animation-delay: 1.6s; }
+    .star:nth-child(22) { left: 3%;  animation-duration: 7s;  animation-delay: 3.8s; }
+    .star:nth-child(23) { left: 47%; animation-duration: 5s;  animation-delay: 5.5s; }
+    .star:nth-child(24) { left: 60%; animation-duration: 9s;  animation-delay: 0.2s; }
+    .star:nth-child(25) { left: 75%; animation-duration: 6s;  animation-delay: 4.8s; }
+
+    /* ===== 浮遊する光の粒 ===== */
+    .floating-light {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(1px);
+      animation: floatUp ease-in-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(0); opacity: 0; }
+      20%  { opacity: 0.8; transform: translateY(-15vh) scale(1); }
+      80%  { opacity: 0.4; }
+      100% { transform: translateY(-80vh) scale(0.3); opacity: 0; }
+    }
+
+    .floating-light:nth-child(1)  { left: 10%; bottom: -20px; width: 6px; height: 6px; background: #50c878; animation-duration: 8s; animation-delay: 0s; }
+    .floating-light:nth-child(2)  { left: 25%; bottom: -20px; width: 4px; height: 4px; background: #ffd700; animation-duration: 10s; animation-delay: 2s; }
+    .floating-light:nth-child(3)  { left: 40%; bottom: -20px; width: 5px; height: 5px; background: #7fffd4; animation-duration: 7s; animation-delay: 1s; }
+    .floating-light:nth-child(4)  { left: 55%; bottom: -20px; width: 3px; height: 3px; background: #fff; animation-duration: 9s; animation-delay: 3s; }
+    .floating-light:nth-child(5)  { left: 70%; bottom: -20px; width: 6px; height: 6px; background: #50c878; animation-duration: 11s; animation-delay: 0.5s; }
+    .floating-light:nth-child(6)  { left: 85%; bottom: -20px; width: 4px; height: 4px; background: #ffd700; animation-duration: 8s; animation-delay: 4s; }
+    .floating-light:nth-child(7)  { left: 15%; bottom: -20px; width: 5px; height: 5px; background: #fff; animation-duration: 9s; animation-delay: 5s; }
+    .floating-light:nth-child(8)  { left: 50%; bottom: -20px; width: 3px; height: 3px; background: #7fffd4; animation-duration: 7s; animation-delay: 2.5s; }
+    .floating-light:nth-child(9)  { left: 35%; bottom: -20px; width: 6px; height: 6px; background: #ffd700; animation-duration: 10s; animation-delay: 1.5s; }
+    .floating-light:nth-child(10) { left: 80%; bottom: -20px; width: 4px; height: 4px; background: #50c878; animation-duration: 8s; animation-delay: 3.5s; }
+
+    /* ===== メインコンテンツ ===== */
+    .main-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* 装飾ライン上 */
+    .ornament {
+      font-size: 1.8rem;
+      color: #ffd700;
+      letter-spacing: 0.8rem;
+      margin-bottom: 1.5rem;
+      animation: softPulse 3s ease-in-out infinite;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    }
+
+    @keyframes softPulse {
+      0%, 100% { opacity: 0.6; }
+      50%      { opacity: 1; }
+    }
+
+    /* 「祝・誕生」 */
+    .celebration {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: #ffd700;
+      letter-spacing: 0.6rem;
+      margin-bottom: 1rem;
+      text-shadow:
+        0 0 10px rgba(255, 215, 0, 0.5),
+        0 0 30px rgba(255, 215, 0, 0.2);
+      animation: fadeInDown 1.5s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 名前「翠斗」 */
+    .name-kanji {
+      font-size: clamp(4rem, 15vw, 10rem);
+      font-weight: 900;
+      background: linear-gradient(
+        135deg,
+        #2e8b57 0%,
+        #50c878 20%,
+        #ffd700 45%,
+        #ffec8b 55%,
+        #50c878 80%,
+        #2e8b57 100%
+      );
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease-in-out infinite, fadeInUp 2s ease-out;
+      filter: drop-shadow(0 0 20px rgba(80, 200, 120, 0.3));
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ローマ字 */
+    .name-romaji {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 4vw, 2.2rem);
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 1rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 2.5s ease-out;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    /* 区切りライン */
+    .divider {
+      width: 60%;
+      max-width: 300px;
+      height: 1px;
+      margin: 0 auto 2rem;
+      background: linear-gradient(90deg, transparent, #ffd700, #50c878, #ffd700, transparent);
+      animation: fadeIn 3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* メッセージ */
+    .message {
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 2.2;
+      letter-spacing: 0.15rem;
+      animation: fadeIn 3.5s ease-out;
+    }
+
+    .message em {
+      font-style: normal;
+      color: #7fffd4;
+      text-shadow: 0 0 8px rgba(127, 255, 212, 0.3);
+    }
+
+    /* 装飾ライン下 */
+    .ornament-bottom {
+      font-size: 1.8rem;
+      color: #ffd700;
+      letter-spacing: 0.8rem;
+      margin-top: 2rem;
+      animation: softPulse 3s ease-in-out infinite 1.5s;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    }
+
+    /* ===== キラッと光るエフェクト ===== */
+    .sparkle-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      animation: sparkleAnim 2s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    .sparkle::before,
+    .sparkle::after {
+      content: '';
+      position: absolute;
+      background: #fff;
+    }
+
+    .sparkle::before {
+      width: 100%;
+      height: 2px;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      border-radius: 1px;
+    }
+
+    .sparkle::after {
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      border-radius: 1px;
+    }
+
+    @keyframes sparkleAnim {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50%      { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+
+    .sparkle:nth-child(1)  { top: 15%; left: 20%; animation-delay: 0s;   animation-duration: 2.5s; }
+    .sparkle:nth-child(2)  { top: 25%; left: 70%; animation-delay: 0.8s; animation-duration: 2s; }
+    .sparkle:nth-child(3)  { top: 40%; left: 15%; animation-delay: 1.5s; animation-duration: 3s; }
+    .sparkle:nth-child(4)  { top: 60%; left: 80%; animation-delay: 0.3s; animation-duration: 2.2s; }
+    .sparkle:nth-child(5)  { top: 75%; left: 35%; animation-delay: 2s;   animation-duration: 2.8s; }
+    .sparkle:nth-child(6)  { top: 10%; left: 50%; animation-delay: 1.2s; animation-duration: 2s; }
+    .sparkle:nth-child(7)  { top: 50%; left: 90%; animation-delay: 0.5s; animation-duration: 3.2s; }
+    .sparkle:nth-child(8)  { top: 85%; left: 60%; animation-delay: 1.8s; animation-duration: 2.5s; }
+    .sparkle:nth-child(9)  { top: 30%; left: 40%; animation-delay: 2.5s; animation-duration: 2s; }
+    .sparkle:nth-child(10) { top: 65%; left: 10%; animation-delay: 0.6s; animation-duration: 2.7s; }
+    .sparkle:nth-child(11) { top: 20%; left: 85%; animation-delay: 1s;   animation-duration: 3s; }
+    .sparkle:nth-child(12) { top: 90%; left: 45%; animation-delay: 2.2s; animation-duration: 2.3s; }
+
+    /* ===== 背景の光のリング ===== */
+    .glow-ring {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      border: 1px solid rgba(80, 200, 120, 0.1);
+      box-shadow:
+        0 0 60px rgba(80, 200, 120, 0.05),
+        inset 0 0 60px rgba(80, 200, 120, 0.05);
+      animation: ringPulse 5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-ring:nth-child(2) {
+      width: 700px;
+      height: 700px;
+      animation-delay: 1s;
+      border-color: rgba(255, 215, 0, 0.06);
+      box-shadow:
+        0 0 80px rgba(255, 215, 0, 0.03),
+        inset 0 0 80px rgba(255, 215, 0, 0.03);
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.3; }
+      50%      { transform: translate(-50%, -50%) scale(1.1); opacity: 0.7; }
+    }
+
+    /* ===== レスポンシブ調整 ===== */
+    @media (max-width: 600px) {
+      .ornament, .ornament-bottom {
+        font-size: 1.2rem;
+        letter-spacing: 0.4rem;
+      }
+
+      .celebration {
+        letter-spacing: 0.3rem;
+      }
+
+      .name-romaji {
+        letter-spacing: 0.5rem;
+      }
+
+      .message {
+        padding: 0 1rem;
+      }
+
+      .glow-ring {
+        width: 300px;
+        height: 300px;
+      }
+
+      .glow-ring:nth-child(2) {
+        width: 420px;
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 背景の光のリング -->
+  <div class="glow-ring"></div>
+  <div class="glow-ring"></div>
+
+  <!-- 降り注ぐ星 -->
+  <div class="stars-container">
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div>
+  </div>
+
+  <!-- 浮遊する光の粒 -->
+  <div class="floating-light"></div><div class="floating-light"></div>
+  <div class="floating-light"></div><div class="floating-light"></div>
+  <div class="floating-light"></div><div class="floating-light"></div>
+  <div class="floating-light"></div><div class="floating-light"></div>
+  <div class="floating-light"></div><div class="floating-light"></div>
+
+  <!-- キラキラスパークル -->
+  <div class="sparkle-overlay">
+    <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
+    <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
+    <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
+    <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
+  </div>
+
+  <!-- メインコンテンツ -->
+  <div class="main-content">
+    <div class="ornament">✦ ✦ ✦</div>
+    <div class="celebration">祝 ・ 誕 生</div>
+    <div class="name-kanji">翠 斗</div>
+    <div class="name-romaji">A K I T O</div>
+    <div class="divider"></div>
+    <div class="message">
+      この世界へようこそ<br>
+      <em>翠</em>のように美しく　星のように輝く<br>
+      あなたの未来に限りない祝福を
+    </div>
+    <div class="ornament-bottom">✦ ✦ ✦</div>
+  </div>
+
+</body>
+</html>
