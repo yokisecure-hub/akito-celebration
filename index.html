@@ -339,6 +339,134 @@
       50%      { transform: translate(-50%, -50%) scale(1.1); opacity: 0.7; }
     }
 
+    /* ===== 写真フレーム ===== */
+    .photo-frame {
+      position: relative;
+      width: clamp(180px, 40vw, 280px);
+      height: clamp(180px, 40vw, 280px);
+      margin: 1.5rem auto 1rem;
+      border-radius: 50%;
+      padding: 5px;
+      background: linear-gradient(135deg, #ffd700, #50c878, #ffd700, #50c878);
+      background-size: 300% 300%;
+      animation: frameSpin 6s ease-in-out infinite, fadeInUp 2s ease-out;
+      box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.3),
+        0 0 40px rgba(80, 200, 120, 0.15),
+        inset 0 0 20px rgba(255, 215, 0, 0.1);
+    }
+
+    @keyframes frameSpin {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 3px solid rgba(3, 13, 8, 0.8);
+    }
+
+    .photo-caption {
+      font-size: clamp(0.75rem, 2vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.5rem;
+      letter-spacing: 0.2rem;
+      animation: fadeIn 3s ease-out;
+    }
+
+    /* ===== オーディオプレーヤー ===== */
+    .audio-player {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(10, 46, 26, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(80, 200, 120, 0.25);
+      border-radius: 50px;
+      padding: 8px 18px 8px 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 3s ease-out;
+      transition: border-color 0.3s;
+    }
+
+    .audio-player:hover {
+      border-color: rgba(255, 215, 0, 0.4);
+    }
+
+    .play-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid #ffd700;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover {
+      background: rgba(255, 215, 0, 0.15);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .play-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffd700;
+    }
+
+    .play-btn .icon-pause { display: none; }
+    .play-btn.playing .icon-play { display: none; }
+    .play-btn.playing .icon-pause { display: block; }
+
+    .audio-label {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.1rem;
+      white-space: nowrap;
+    }
+
+    .audio-bars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 20px;
+    }
+
+    .audio-bars span {
+      display: block;
+      width: 3px;
+      background: #50c878;
+      border-radius: 2px;
+      animation: none;
+    }
+
+    .audio-bars.active span {
+      animation: barBounce 0.8s ease-in-out infinite;
+    }
+
+    .audio-bars span:nth-child(1) { height: 6px; animation-delay: 0s; }
+    .audio-bars span:nth-child(2) { height: 12px; animation-delay: 0.15s; }
+    .audio-bars span:nth-child(3) { height: 8px; animation-delay: 0.3s; }
+    .audio-bars span:nth-child(4) { height: 16px; animation-delay: 0.1s; }
+    .audio-bars span:nth-child(5) { height: 10px; animation-delay: 0.25s; }
+
+    @keyframes barBounce {
+      0%, 100% { transform: scaleY(0.4); }
+      50%      { transform: scaleY(1.2); }
+    }
+
     /* ===== レスポンシブ調整 ===== */
     @media (max-width: 600px) {
       .ornament, .ornament-bottom {
@@ -366,6 +494,21 @@
       .glow-ring:nth-child(2) {
         width: 420px;
         height: 420px;
+      }
+
+      .audio-player {
+        bottom: 16px;
+        right: 16px;
+        padding: 6px 14px 6px 8px;
+      }
+
+      .play-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .audio-label {
+        font-size: 0.65rem;
       }
     }
   </style>
@@ -410,6 +553,12 @@
     <div class="celebration">祝 ・ 誕 生</div>
     <div class="name-kanji">翠 斗</div>
     <div class="name-romaji">A K I T O</div>
+
+    <!-- 写真フレーム -->
+    <div class="photo-frame">
+      <img src="photo.jpg" alt="翠斗くんの写真">
+    </div>
+
     <div class="divider"></div>
     <div class="message">
       この世界へようこそ<br>
@@ -418,6 +567,37 @@
     </div>
     <div class="ornament-bottom">✦ ✦ ✦</div>
   </div>
+
+  <!-- オーディオプレーヤー -->
+  <div class="audio-player">
+    <button class="play-btn" id="playBtn" onclick="togglePlay()">
+      <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+    </button>
+    <div class="audio-bars" id="audioBars">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <span class="audio-label">BGM</span>
+  </div>
+  <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+
+  <script>
+    const bgm = document.getElementById('bgm');
+    const playBtn = document.getElementById('playBtn');
+    const audioBars = document.getElementById('audioBars');
+
+    function togglePlay() {
+      if (bgm.paused) {
+        bgm.play();
+        playBtn.classList.add('playing');
+        audioBars.classList.add('active');
+      } else {
+        bgm.pause();
+        playBtn.classList.remove('playing');
+        audioBars.classList.remove('active');
+      }
+    }
+  </script>
 
 </body>
 </html>
